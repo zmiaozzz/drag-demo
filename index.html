@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drag-demo</title>
+    <link rel="stylesheet" href="drag.css">
+    <script src="drag.js"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="drag_box"></div>
+</div>
+<script>
+    window.onload = function () {
+        var opt = {
+            target: document.getElementById('drag_box'),
+            container: document.body
+        };
+        var drag = new Dragdrop(opt);
+    }
+
+
+</script>
+</body>
+</html>

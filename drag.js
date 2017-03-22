@@ -26,34 +26,35 @@ var Util = {
 
 var config;
 var distance = {};
-function Config(opt) {
-    this.target = opt.target;
-    this.container = opt.container;
-}
+
 function Dragdrop(opt) {
     if(!opt) return;
-    config = new Config(opt);
-    console.log(config)
+    config = opt;
     Util.on(config.target, 'mousedown', mouseDown);
 }
 
 function mouseDown(event) {
     var e = Util.evt(event);
+
     //鼠标位置
     var mousePos = {};
     mousePos.left = e.clientX;
     mousePos.top = e.clientY;
+
     //拖拽对象
     var el = config.target;
     el.style.position = 'absolute';
     el.style.cursor = 'move';
+
     //拖拽对象的位置
     var elePos = {};
     elePos.left = el.offsetLeft;
     elePos.top = el.offsetTop;
+
     //鼠标位置在拖拽对象中的位置
     distance.left = mousePos.left - elePos.left;
     distance.top = mousePos.top - elePos.top;
+
     //监听鼠标移动和鼠标松开事件
     Util.on(document, 'mousemove', mouseMove);
     Util.on(document, 'mouseup', mouseUp);
@@ -62,14 +63,17 @@ function mouseMove(event) {
     var e = Util.evt(event);
     var el = config.target;
     var container = config.container;
+
     //鼠标移动过程中，鼠标的位置
     var mousePos = {};
     mousePos.left = e.clientX;
     mousePos.top = e.clientY;
+
     //拖拽对象的位置变化
     var targetPos = {};
     targetPos.left = mousePos.left - distance.left;
     targetPos.top = mousePos.top - distance.top;
+
     //容器大小
     var containerSize = {};
     containerSize.cWidth = container.offsetWidth;
@@ -92,6 +96,7 @@ function mouseMove(event) {
     else if(targetPos.top > maxTop) {
         targetPos.top = maxTop;
     }
+
     //改变target的位置，随着鼠标移动
     el.style.left = targetPos.left + 'px';
     el.style.top = targetPos.top + 'px';
